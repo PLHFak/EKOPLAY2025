@@ -818,11 +818,50 @@ window.addEventListener('popstate', () => {
 });
 
 // Also handle when user clicks on demo links
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
     const link = e.target.closest('a[href*="?demo="]');
     if (link && link.href.includes('?demo=')) {
         e.preventDefault();
-        console.log('🔄 Demo link clicked - reloading page...');
+        console.log('🔄 Demo link clicked - stopping players and reloading...');
+
+        // CRITICAL: Stop all players IMMEDIATELY before reload
+        if (window.ekoPlayer && window.ekoPlayer.players) {
+            console.log('⏹️ Stopping all players before demo switch...');
+            try {
+                // Pause all players synchronously
+                await Promise.all(window.ekoPlayer.players.map(p => p.pause()));
+                // Mute all players
+                await Promise.all(window.ekoPlayer.players.map(p => p.setMuted(true)));
+                // Set volume to 0 for extra safety
+                await Promise.all(window.ekoPlayer.players.map(p => p.setVolume(0)));
+                console.log('✅ All players stopped');
+            } catch (error) {
+                console.error('⚠️ Error stopping players:', error);
+            }
+        }
+
+        // Small delay to ensure commands are processed
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // Now reload
         window.location.href = link.href;
     }
 });
+
+// Cleanup when page is about to unload (navigation, refresh, close)
+window.addEventListener('beforeunload', () => {
+    console.log('🧹 Page unloading - cleaning up players...');
+    if (window.ekoPlayer && window.ekoPlayer.players) {
+        // Synchronous cleanup (beforeunload doesn't wait for promises)
+        window.ekoPlayer.players.forEach(player => {
+            try {
+                player.pause();
+                player.setMuted(true);
+                player.setVolume(0);
+            } catch (error) {
+                // Ignore errors during cleanup
+            }
+        });
+    }
+});
+
