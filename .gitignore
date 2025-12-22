@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+.cache/
+
+# Videos (hosted on Vimeo)
+videos/
+*.mp4
+*.mov
+
+# Backups
+backup_*/
+waveforms_backup/
+
+# Build scripts (not needed for deployment)
+create_*.sh
+create_*.py
+generate_*.sh

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKOPLAY - Demo Gallery</title>
+    <link rel="stylesheet" href="style.css?v=4">
+    <style>
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .gallery-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery-header p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+            transform: translateX(-5px);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .demo-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .demo-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .demo-info {
+            padding: 20px;
+        }
+
+        .demo-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f1f5f9;
+        }
+
+        .demo-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .demo-duration {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .demo-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .coming-soon {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .coming-soon-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(251, 191, 36, 0.9);
+            color: #1e293b;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gallery-container">
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to Demo
+        </a>
+
+        <div class="gallery-header">
+            <h1>EKOPLAY Demo Gallery</h1>
+            <p>Explore synchronized slow-motion audio demonstrations across different sports</p>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Boxing Demo -->
+            <a href="index.html?demo=boxing" class="demo-card">
+                <img src="assets/thumbnails/boxing.jpg" alt="Boxing Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🥊 Boxing Match</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            18 sec
+                        </span>
+                        <span class="demo-badge">AVAILABLE</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Jump B Demo -->
+            <a href="index.html?demo=jump" class="demo-card">
+                <img src="assets/thumbnails/jump.jpg" alt="Jump B Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🏃 Athletic Jump B</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            18 sec
+                        </span>
+                        <span class="demo-badge">AVAILABLE</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Tennis Demo -->
+            <a href="index.html?demo=tennis" class="demo-card">
+                <img src="assets/thumbnails/tennis.jpg" alt="Tennis Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🎾 Tennis Serve</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            15 sec
+                        </span>
+                        <span class="demo-badge">AVAILABLE</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Basketball Demo -->
+            <a href="index.html?demo=basketball" class="demo-card">
+                <img src="assets/thumbnails/basketball.jpg" alt="Basketball Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🏀 Basketball Action</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            20 sec
+                        </span>
+                        <span class="demo-badge">AVAILABLE</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Football Demo -->
+            <a href="index.html?demo=football" class="demo-card">
+                <img src="assets/thumbnails/football.jpg" alt="Football Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">⚽ Football Goal</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            22 sec
+                        </span>
+                        <span class="demo-badge">AVAILABLE</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Cricket Demo -->
+            <a href="index.html?demo=cricket" class="demo-card">
+                <img src="assets/thumbnails/cricket.jpg" alt="Cricket Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🏏 Cricket Match</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            18 sec
+                        </span>
+                        <span class="demo-badge">AVAILABLE</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- UFC Demo -->
+            <a href="index.html?demo=ufc" class="demo-card">
+                <img src="assets/thumbnails/ufc.jpg" alt="UFC Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🥋 UFC Fight</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            20 sec
+                        </span>
+                        <span class="demo-badge">AVAILABLE</span>
+                    </div>
+                </div>
+            </a>
+
+            <div class="demo-card coming-soon" style="position: relative;">
+                <span class="coming-soon-badge">COMING SOON</span>
+                <img src="waveform2.png" alt="Golf Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">⛳ Golf Swing</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            12 sec
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-card coming-soon" style="position: relative;">
+                <span class="coming-soon-badge">COMING SOON</span>
+                <img src="waveform3.png" alt="Baseball Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">⚾ Baseball Hit</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            16 sec
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-card coming-soon" style="position: relative;">
+                <span class="coming-soon-badge">COMING SOON</span>
+                <img src="waveform1.png" alt="Skateboarding Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🛹 Skateboard Trick</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            14 sec
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-card coming-soon" style="position: relative;">
+                <span class="coming-soon-badge">COMING SOON</span>
+                <img src="waveform2.png" alt="Surfing Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🏄 Surfing Wave</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            25 sec
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-card coming-soon" style="position: relative;">
+                <span class="coming-soon-badge">COMING SOON</span>
+                <img src="waveform3.png" alt="Motorsport Demo" class="demo-thumbnail">
+                <div class="demo-info">
+                    <h3 class="demo-title">🏎️ Racing Start</h3>
+                    <div class="demo-meta">
+                        <span class="demo-duration">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            18 sec
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>EKO</strong> — Engine for Knowledge Orchestrator</p>
+        <p class="patent-notice">🔒 Patented SADR Technology (Synthetic Audio Dynamic Recreation)</p>
+    </footer>
+</body>
+
+</html>
