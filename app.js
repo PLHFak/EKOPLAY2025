@@ -2,37 +2,71 @@
 // Using Vimeo Player API and pre-computed waveforms
 
 class EkoPlayer {
+    // Singleton instance
+    static instance = null;
+
     constructor() {
         // Load demo configuration
         const demoConfig = getCurrentDemo();
         console.log(`🎬 Loading demo: ${demoConfig.title}`);
 
-        // Vimeo video IDs from library
-        this.vimeoIds = demoConfig.vimeoIds;
+        // Centralized state management
+        this.state = {
+            // Demo configuration
+            demoConfig: demoConfig,
+            vimeoIds: demoConfig.vimeoIds,
 
-        this.players = [];
-        this.activeAudioIndex = 0;  // DEFAULT TO VIDEO 1 (SEQUENCE 1 - REFERENCE)
-        this.isPlayingAll = false;
-        this.playersReady = 0;
-        this.loopCounters = [0, 0, 0];
-        this.lastLoggedSecond = {};
-        this.isResyncPaused = false;
-        this.hasPlayedOnce = false;
-        this.autoPlayTriggered = false;
-        this.isBuffering = true; // Track buffering state
+            // Players
+            players: [],
+            playersReady: 0,
 
-        // Fullscreen mode
-        this.fullscreenActive = false;
-        this.fullscreenVideoIndex = null;
+            // Playback state
+            isPlayingAll: false,
+            activeAudioIndex: 0,  // DEFAULT TO VIDEO 1 (SEQUENCE 1 - REFERENCE)
+            hasPlayedOnce: false,
+            autoPlayTriggered: false,
+            isBuffering: true,
 
-        // Waveform data storage
-        this.waveformData = [null, null, null];
+            // Loop tracking
+            loopCounters: [0, 0, 0],
+            lastLoggedSecond: {},
+            isResyncPaused: false,
 
-        // Store demo config
-        this.demoConfig = demoConfig;
+            // Fullscreen
+            fullscreenActive: false,
+            fullscreenVideoIndex: null,
+
+            // Waveforms
+            waveformData: [null, null, null]
+        };
+
+        // Event listeners tracking for cleanup
+        this.eventListeners = [];
+
+        // Backward compatibility - expose state properties
+        this.players = this.state.players;
+        this.demoConfig = this.state.demoConfig;
+        this.vimeoIds = this.state.vimeoIds;
 
         this.init();
         this.updateDemoUI();
+    }
+
+    // Factory method for creating/replacing instance
+    static async create() {
+        console.log('🏗️ EkoPlayer.create() called');
+
+        // Destroy existing instance if any
+        if (EkoPlayer.instance) {
+            console.log('🧹 Destroying existing instance...');
+            await EkoPlayer.instance.destroy();
+            EkoPlayer.instance = null;
+        }
+
+        // Create new instance
+        console.log('✨ Creating new instance...');
+        EkoPlayer.instance = new EkoPlayer();
+        return EkoPlayer.instance;
     }
 
     updateDemoUI() {
@@ -795,15 +829,8 @@ class EkoPlayer {
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('🌐 DOM loaded, creating EKOPLAY instance...');
 
-    // Cleanup old instance if it exists
-    if (window.ekoPlayer) {
-        console.log('🧹 Cleaning up previous EkoPlayer instance...');
-        await window.ekoPlayer.destroy();
-        window.ekoPlayer = null;
-    }
-
-    // Create new instance
-    const app = new EkoPlayer();
+    // Use factory method to create/replace instance
+    const app = await EkoPlayer.create();
 
     // Make it globally accessible for debugging
     window.ekoPlayer = app;
