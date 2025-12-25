@@ -163,10 +163,10 @@ const DEMO_LIBRARY = {
                 speed: "1×"
             },
             {
-                title: "Basketball 2 — Slow-Motion (Standard)",
-                badge: "REPLAY 3×",
-                description: "Ambient audio with slow-motion video",
-                speed: "3×"
+                title: "Basketball 2 — Not Available",
+                badge: "N/A",
+                description: "This sequence is not available",
+                speed: "-"
             },
             {
                 title: "Basketball 3 — Slow-Motion (EKO Synthetic)",
