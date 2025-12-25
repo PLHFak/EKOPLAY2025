@@ -114,11 +114,32 @@ class EkoPlayer {
         }
     }
 
+    // Helper method to safely call player methods (handles null players)
+    async safePlayerCall(index, method, ...args) {
+        if (!this.state.players[index]) {
+            return null; // Player doesn't exist (empty video slot)
+        }
+        try {
+            return await this.state.players[index][method](...args);
+        } catch (error) {
+            console.warn(`⚠️ Player ${index}.${method}() failed:`, error.message);
+            return null;
+        }
+    }
+
     async init() {
         console.log('🚀 EKOPLAY: Initializing...');
 
         // Initialize Vimeo players
         for (let i = 0; i < 3; i++) {
+            // Skip if no Vimeo ID (empty/placeholder)
+            if (!this.vimeoIds[i] || this.vimeoIds[i].trim() === '') {
+                console.log(`⚫ Player ${i} - No video (empty ID, will show black)`);
+                this.state.players[i] = null; // Placeholder
+                this.state.playersReady++;
+                continue;
+            }
+
             console.log(`📹 Creating player ${i} with Vimeo ID: ${this.vimeoIds[i]}`);
 
             const player = new Vimeo.Player(`video-${i}`, {
@@ -126,7 +147,7 @@ class EkoPlayer {
                 width: 640,
                 responsive: true,
                 controls: false,
-                muted: (i !== this.activeAudioIndex),
+                muted: (i !== this.state.activeAudioIndex),
                 autoplay: false,
                 background: true,  // CRITICAL: Allow multiple videos to play simultaneously
                 quality: 'auto',   // Auto quality selection
