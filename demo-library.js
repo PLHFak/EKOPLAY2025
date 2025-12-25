@@ -146,7 +146,7 @@ const DEMO_LIBRARY = {
         title: "Basketball Demo",
         subtitle: "Frame-Accurate Audio Sync for Basketball Action",
         vimeoIds: [
-            '1149346044', // Basketball 1 - Real-Time (NEW VIDEO)
+            '1148505838', // Basketball 1 - Using Basketball 3 as reference (correct format)
             '',           // Basketball 2 - Does not exist (will show black)
             '1148505838'  // Basketball 3 - Slow-Motion EKO
         ],
