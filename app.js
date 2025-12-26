@@ -156,16 +156,19 @@ class EkoPlayer {
 
             console.log(`📹 Creating player ${i} with Vimeo ID: ${this.vimeoIds[i]}`);
 
+            // Check if this is a portrait video (Basketball1 with TikTok format)
+            const isPortraitVideo = (this.state.demoConfig.title === "Basketball Demo" && i === 0 && this.vimeoIds[i] === '1149346044');
+
             const player = new Vimeo.Player(`video-${i}`, {
                 id: this.vimeoIds[i],
                 width: 640,
-                responsive: true,
+                responsive: !isPortraitVideo,  // Disable responsive for portrait videos
                 controls: false,
                 muted: (i !== this.state.activeAudioIndex),
                 autoplay: false,
-                background: true,  // CRITICAL: Allow multiple videos to play simultaneously
-                quality: 'auto',   // Auto quality selection
-                playsinline: true  // Better mobile support
+                background: !isPortraitVideo,  // Disable background mode for portrait to preserve aspect ratio
+                quality: 'auto',
+                playsinline: true
             });
 
             this.players.push(player);

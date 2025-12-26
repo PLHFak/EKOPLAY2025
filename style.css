@@ -409,6 +409,8 @@ h1 {
 .video-wrapper iframe {
     width: 100%;
     height: 100%;
+    object-fit: contain;
+    /* Preserve aspect ratio with letterboxing */
 }
 
 /* Clickable overlay for audio switching */
